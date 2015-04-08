@@ -44,8 +44,8 @@
                           passes: 1)
   (let ((halfWidth (/ width 2))
         (halfHeight (/ height 2))
-        (alpha (col/getAlpha colour: colour))
-        (passColour (col/setAlpha colour: colour alpha: (/ alpha passes)))
+        (alpha (col/get-alpha colour: colour))
+        (passColour (col/set-alpha colour: colour value: (/ alpha passes)))
         (rng (rng/signed seed: "asdf")))
     (onMatrixStack
      (translate x: x y: y)
@@ -86,15 +86,17 @@
 
         (rng (rng/signed seed: seed))
 
-        (halfAlpha (/ (col/getAlpha colour: colour) 2))
-        (labColour (col/setAlpha colour: (col/convert format: LAB colour: colour)
-                                 alpha: halfAlpha)))
+        (halfAlpha (/ (col/get-alpha colour: colour) 2))
+        (labColour (col/set-alpha colour: (col/convert format: LAB
+                                                       colour: colour)
+                                  value: halfAlpha)))
                                         ; horizontal strips
     (loop (i to: iterations)
           (let (((rx1 ry1 rx2 ry2 rx3 ry3 rx4 ry4) (take num: 8 from: rng))
-                (lightness (+ (col/getLightness colour: labColour)
+                (lightness (+ (col/get-lab-l colour: labColour)
                               (* colourVolatility (take from: rng))))
-                (current-colour (col/setLightness colour: labColour l: lightness)))
+                (current-colour (col/set-lab-l colour: labColour
+                                               value: lightness)))
             (bezier tessellation: 10
                     lineWidth: (+ overlap hStripWidth)
                     coords: (pair
@@ -121,9 +123,10 @@
                                         ; vertical strips
     (loop (i to: iterations)
           (let (((rx1 ry1 rx2 ry2 rx3 ry3 rx4 ry4) (take num: 8 from: rng))
-                (lightness (+ (col/getLightness colour: labColour)
+                (lightness (+ (col/get-lab-l colour: labColour)
                               (* colourVolatility (take from: rng))))
-                (current-colour (col/setLightness colour: labColour l: lightness)))
+                (current-colour (col/set-lab-l colour: labColour
+                                               value: lightness)))
             (bezier tessellation: 10
                     lineWidth: (+ overlap vStripWidth)
                     coords: (pair
