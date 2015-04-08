@@ -7,6 +7,7 @@
 (define numGaps (+ numSquares 1))
 (define squareSize (/ (- 1000 (* gapSize numGaps)) numSquares))
 
+(wash)
 
 (loop (y from: 1 to: (- numSquares 1))
 	(loop (x from: 1 to: (- numSquares 1))
@@ -37,8 +38,8 @@
                           seed: "asdf")
   (let ((halfWidth (/ width 2))
         (halfHeight (/ height 2))
-        (alpha (col/getAlpha colour: colour))
-        (passColour (col/setAlpha colour: colour alpha: (/ alpha passes)))
+        (alpha (col/get-alpha colour: colour))
+        (passColour (col/set-alpha colour: colour value: (/ alpha passes)))
         (rng (rng/signed seed: seed)))
     (onMatrixStack
      (translate x: x y: y)
