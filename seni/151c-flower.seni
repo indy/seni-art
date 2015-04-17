@@ -8,38 +8,38 @@
 (define (petal-1
          angle: 0
          colour: (col/rgb r: 0.0 g: 1.0 b: 0.0 alpha: 1.0))
-  (onMatrixStack
+  (on-matrix-stack
    (rotate angle: angle)
-   (bezierBulging tessellation: 20
-                  lineWidth: [50 (int min: 10 max: 200)]
-                  colour: colour
-                  coords: (pair 0 0
-                                233.33 100
-                                566.66 -100
-                                800 0))))
+   (bezier-bulging tessellation: 20
+                   line-width: [50 (int min: 10 max: 200)]
+                   colour: colour
+                   coords: (pair 0 0
+                                 233.33 100
+                                 566.66 -100
+                                 800 0))))
 
 (define (petal-2
          angle: 0
          colour: (col/rgb r: 0.0 g: 1.0 b: 0.0 alpha: 1.0))
-  (onMatrixStack
+  (on-matrix-stack
    (rotate angle: angle)
-   (bezierBulging tessellation: 20
-                  lineWidth: [50 (int min: 10 max: 200)]
-                  colour: colour
-                  coords: (pair 0 0
-                                233.33 -100
-                                566.66 100
-                                800 0))))
+   (bezier-bulging tessellation: 20
+                   line-width: [50 (int min: 10 max: 200)]
+                   colour: colour
+                   coords: (pair 0 0
+                                 233.33 -100
+                                 566.66 100
+                                 800 0))))
 
 (define (circ-1
          petals: 0
          colour: (col/rgb r: 0.0 g: 1.0 b: 0.0 alpha: 1.0)
          sc: 1.0)
-  (onMatrixStack
+  (on-matrix-stack
    (scale x: sc y: sc)
    (let ((strokes petals)
          (colcol (col/set-alpha colour: colour value: 0.3))
-         (rem (remapFn from: (list 0 strokes) to: (list 0 6.28318))))
+         (rem (remap-fn from: (list 0 strokes) to: (list 0 6.28318))))
      (loop (i from: 0 to: strokes)
            (petal-1 angle: (rem val: i) colour: colcol)))))
 
@@ -47,11 +47,11 @@
          petals: 0
          colour: (col/rgb r: 0.0 g: 1.0 b: 0.0 alpha: 1.0)
          sc: 1.0)
-  (onMatrixStack
+  (on-matrix-stack
    (scale x: sc y: sc)
    (let ((strokes petals)
          (colcol (col/set-alpha colour: colour value: 0.4))
-         (rem (remapFn from: (list 0 strokes) to: (list 0 6.28318))))
+         (rem (remap-fn from: (list 0 strokes) to: (list 0 6.28318))))
      (loop (i from: 0 to: strokes)
            (petal-2 angle: (rem val: i) colour: colcol)))))
 
@@ -68,7 +68,7 @@
          posx: 0
          posy: 0
          sc: 1)
-  (onMatrixStack
+  (on-matrix-stack
    (translate x: posx y: posy)
    (scale x: sc y: sc)
    (let (((c2 c3) (col/analagous colour: colour)))
@@ -84,13 +84,13 @@
   (+ y (* scale (perlin/signed x: x y: y z: z))))
 
 (define (wash variation: 200
-              lineWidth: 70
+              line-width: 70
               lineSegments: 5
               colour: (col/rgb r: 0.627 g: 0.627 b: 0.627 alpha: 0.4)
               seed: 272)
   (loop (h from: -20 to: 1020 increment: 20)
         (bezier tessellation: lineSegments
-                lineWidth: lineWidth
+                line-width: line-width
                 coords: (pair 
                          0 (v x: 0.10 y: h z: seed scale: variation)
                          333 (v x: 333.33 y: h z: seed scale: variation)
@@ -98,7 +98,7 @@
                          1000 (v x: 1000.10 y: h z: seed scale: variation))
                 colour: colour)
         (bezier tessellation: lineSegments
-                lineWidth: lineWidth
+                line-width: line-width
                 coords: (pair 
                          (v x: 0.10 y: h z: seed scale: variation) 0
                          (v x: 333.33 y: h z: seed scale: variation) 333
