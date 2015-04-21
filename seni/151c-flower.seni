@@ -13,10 +13,10 @@
    (bezier-bulging tessellation: 20
                    line-width: [50 (int min: 10 max: 200)]
                    colour: colour
-                   coords: (pair 0 0
-                                 233.33 100
-                                 566.66 -100
-                                 800 0))))
+                   coords: (list (v2 0 0)
+                                 (v2 233.33 100)
+                                 (v2 566.66 -100)
+                                 (v2 800 0)))))
 
 (define (petal-2
          angle: 0
@@ -26,10 +26,10 @@
    (bezier-bulging tessellation: 20
                    line-width: [50 (int min: 10 max: 200)]
                    colour: colour
-                   coords: (pair 0 0
-                                 233.33 -100
-                                 566.66 100
-                                 800 0))))
+                   coords: (list (v2 0 0)
+                                 (v2 233.33 -100)
+                                 (v2 566.66 100)
+                                 (v2 800 0)))))
 
 (define (circ-1
          petals: 0
@@ -85,23 +85,23 @@
 
 (define (wash variation: 200
               line-width: 70
-              lineSegments: 5
+              line-segments: 5
               colour: (col/rgb r: 0.627 g: 0.627 b: 0.627 alpha: 0.4)
               seed: 272)
   (loop (h from: -20 to: 1020 increment: 20)
-        (bezier tessellation: lineSegments
+        (bezier tessellation: line-segments
                 line-width: line-width
-                coords: (pair 
-                         0 (v x: 0.10 y: h z: seed scale: variation)
-                         333 (v x: 333.33 y: h z: seed scale: variation)
-                         666 (v x: 666.66 y: h z: seed scale: variation)
-                         1000 (v x: 1000.10 y: h z: seed scale: variation))
+                coords: (list
+                         (v2 0 (v x: 0.10 y: h z: seed scale: variation))
+                         (v2 333 (v x: 333.33 y: h z: seed scale: variation))
+                         (v2 666 (v x: 666.66 y: h z: seed scale: variation))
+                         (v2 1000 (v x: 1000.10 y: h z: seed scale: variation)))
                 colour: colour)
-        (bezier tessellation: lineSegments
+        (bezier tessellation: line-segments
                 line-width: line-width
-                coords: (pair 
-                         (v x: 0.10 y: h z: seed scale: variation) 0
-                         (v x: 333.33 y: h z: seed scale: variation) 333
-                         (v x: 666.66 y: h z: seed scale: variation) 666
-                         (v x: 1000.10 y: h z: seed scale: variation) 1000)
+                coords: (list
+                         (v2 (v x: 0.10 y: h z: seed scale: variation) 0)
+                         (v2 (v x: 333.33 y: h z: seed scale: variation) 333)
+                         (v2 (v x: 666.66 y: h z: seed scale: variation) 666)
+                         (v2 (v x: 1000.10 y: h z: seed scale: variation) 1000))
                 colour: colour)))
