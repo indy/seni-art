@@ -45,8 +45,7 @@
            (let (((rr xr yr) (take num: 3 from: rng)))
              (on-matrix-stack
               (rotate angle: (* rr 0.02 volatility))
-              (rect x: (* xr 5 volatility)
-                    y: (* yr 5 volatility)
+              (rect position: (v2 (* xr 5 volatility) (* yr 5 volatility))
                     width: width
                     height: height
                     colour: pass-colour)))))))

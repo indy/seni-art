@@ -16,8 +16,7 @@
       (loop (x from: 1 to: (- num-squares 1))
             (let ((x-pos (map-to-position at: x))
                   (y-pos (map-to-position at: y)))
-              (stroked-bezier-rect x: x-pos
-                                   y: y-pos
+              (stroked-bezier-rect position: (v2 x-pos y-pos)
                                    colour-volatility: 20
                                    volatility: (/ (math/distance-2d x1: 500 
                                                                     y1: 500
@@ -34,8 +33,7 @@
 (define (map-to-position at: 0)
   (+ (* (+ gap-size square-size) at) (/ square-size 2) gap-size))
 
-(define (stroked-bezier-rect x: 0
-                             y: 0
+(define (stroked-bezier-rect position: (v2 0 0)
                              width: 10
                              height: 10
                              colour: (col/rgb r: 0.0 g: 1.0 b: 0.0 a: 0.5)
@@ -44,7 +42,9 @@
                              overlap: 3
                              iterations: 10
                              seed: "shabba")
-  (let ((third-width (/ width 3))
+  (let ((x (v2/x position))
+        (y (v2/y position))
+        (third-width (/ width 3))
         (third-height (/ height 3))
         (vol volatility)
 

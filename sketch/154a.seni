@@ -58,8 +58,7 @@
                 colourVolatility: 700
                 seed: 220)
 
-(stroked-bezier-rect x: 500
-                     y: 500
+(stroked-bezier-rect position: (v2 500 500)
                      width: 400
                      height: 400
 

@@ -9,32 +9,33 @@
 (define square-pos-min (+ border square-radius))
 (define square-pos-max (- 1000 (+ border square-radius)))
 
-(rect x: square-pos-min y: square-pos-max
+(rect position: (v2 square-pos-min square-pos-max)
       width: square-size height: square-size
   	  colour: base-colour)
 
-(accumulated-rect x: square-pos-max y: square-pos-max
+(accumulated-rect position: (v2 square-pos-max square-pos-max)
                   width: square-size height: square-size
                   colour: base-colour
                   volatility: 1.5
                   passes: 50)
 
-(stroked-bezier-rect x: square-pos-min y: square-pos-min
-                     width: square-size height: square-size
+(stroked-bezier-rect position: (v2 square-pos-min square-pos-min)
+                     width: square-size
+                     height: square-size
                      colour: base-colour
                      volatility: 10.0
                      overlap: 3.0)
 
-(stroked-bezier-rect x: square-pos-max y: square-pos-min
-                     width: square-size height: square-size
+(stroked-bezier-rect position: (v2 square-pos-max square-pos-min)
+                     width: square-size
+                     height: square-size
                      colour: base-colour
                      colour-volatility: 10
                      volatility: 10.0
                      overlap: 3.0
                      iterations: 79)
 
-(define (accumulated-rect x: 0
-                          y: 0
+(define (accumulated-rect position: (v2 0 0)
                           width: 10
                           height: 10
                           colour: (col/rgb r: 0.0 g: 1.0 b: 0.0 alpha: 0.5)
@@ -46,19 +47,17 @@
         (pass-colour (col/set-alpha colour: colour value: (/ alpha passes)))
         (rng (rng/signed seed: seed)))
     (on-matrix-stack
-     (translate x: x y: y)
+     (translate x: (v2/x position) y: (v2/y position))
      (loop (i to: passes)
            (let (((rr xr yr) (take num: 3 from: rng)))
              (on-matrix-stack
               (rotate angle: (* rr 0.02 volatility))
-              (rect x: (* xr 5 volatility)
-                    y: (* yr 5 volatility)
+              (rect position: (v2 (* xr 5 volatility) (* yr 5 volatility))
                     width: width
                     height: height
                     colour: pass-colour)))))))
 
-(define (stroked-bezier-rect x: 0
-                             y: 0
+(define (stroked-bezier-rect position: (v2 0 0)
                              width: 10
                              height: 10
                              colour: (col/rgb r: 0.0 g: 1.0 b: 0.0 a: 0.5)
@@ -67,7 +66,9 @@
                              overlap: 3
                              iterations: 10
                              seed: "shabba")
-  (let ((third-width (/ width 3))
+  (let ((x (v2/x position))
+        (y (v2/y position))
+        (third-width (/ width 3))
         (third-height (/ height 3))
         (vol volatility)
 

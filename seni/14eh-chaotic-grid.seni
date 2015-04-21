@@ -30,8 +30,7 @@
                                                   [12 (int min:5 max: 50)])
                                           min: 0
                                           max: 50)))
-              (stroked-bezier-rect x: x-pos
-                                   y: y-pos
+              (stroked-bezier-rect position: (v2 x-pos y-pos)
                                    colour-volatility: [20 (int min: 2 max: 40)]
                                    volatility: volatility
                                    seed: (+ x (* y num-squares))
@@ -42,8 +41,7 @@
 (define (map-to-position at: 0)
   (+ (* (+ gap-size square-size) at) (/ square-size 2) gap-size))
 
-(define (stroked-bezier-rect x: 0
-                             y: 0
+(define (stroked-bezier-rect position: (v2 0 0)
                              width: 10
                              height: 10
                              colour: (col/rgb r: 0.0 g: 1.0 b: 0.0 a: 0.5)
@@ -52,7 +50,9 @@
                              overlap: 3
                              iterations: 10
                              seed: "shabba")
-  (let ((third-width (/ width 3))
+  (let ((x (v2/x position))
+        (y (v2/y position))
+        (third-width (/ width 3))
         (third-height (/ height 3))
         (vol volatility)
 
@@ -152,8 +152,7 @@
            (let (((rr xr yr) (take num: 3 from: rng)))
              (on-matrix-stack
               (rotate angle: (* rr 0.02 volatility))
-              (rect x: (* xr 5 volatility)
-                    y: (* yr 5 volatility)
+              (rect position: (v2 (* xr 5 volatility) (* yr 5 volatility))
                     width: width
                     height: height
                     colour: pass-colour)))))))

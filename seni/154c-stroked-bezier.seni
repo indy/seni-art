@@ -1,5 +1,4 @@
-(rect x: 500 
-      y: 500 
+(rect position: (v2 500 500)
       width: 1000 
       height: 1000 
       colour: (col/rgb r: 0 g: 0 b: 0 alpha 1))
@@ -7,8 +6,7 @@
 (translate x: 500 y: 500)
 (rotate angle: PI/2)
 
-(stroked-bezier-rect x: 0
-                     y: 0
+(stroked-bezier-rect position: (v2 0 0)
                      width: [900 (int min: 500 max: 1000)]
                      height: [900 (int min: 500 max: 1000)]
 

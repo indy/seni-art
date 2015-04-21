@@ -34,8 +34,7 @@
                                value: (+ (col/get-lab-l colour: top-colour)
                                          [10.5 (scalar min: 0.0 max: 20.0)]))))
 
-    (stroked-bezier-rect x: 250
-                         y: y
+    (stroked-bezier-rect position: (v2 250 y)
                          width: width
                          height: height
                          iterations: iterations
@@ -47,8 +46,7 @@
                          colour-volatility: colour-volatility
                          volatility: volatility
                          seed: [44 (int)])
-    (stroked-bezier-rect x: 550
-                         y: y
+    (stroked-bezier-rect position: (v2 550 y)
                          width: width
                          height: height
                          iterations: iterations
@@ -60,8 +58,7 @@
                          colour-volatility: colour-volatility
                          volatility: volatility
                          seed: [45 (int)])
-    (stroked-bezier-rect x: 850
-                         y: y
+    (stroked-bezier-rect position: (v2 850 y)
                          width: width
                          height: height
                          iterations: iterations
@@ -75,8 +72,7 @@
                          seed: [46 (int)])))
 
 (define (top-section)
-  (stroked-bezier-rect x: 500
-                       y: 750
+  (stroked-bezier-rect position: (v2 500 750)
                        width: 900
                        height: 400
                        iterations: [40 (int min: 1 max: 100)]
@@ -91,8 +87,7 @@
   (top-section-highlights))
 
 (define (middle-section)
-  (stroked-bezier-rect x: 500
-                       y: 425
+  (stroked-bezier-rect position: (v2 500 425)
                        width: 900
                        height: 250
                        iterations: [40 (int min: 1 max: 100)]
@@ -110,8 +105,7 @@
                                value: (- (col/get-lab-l
                                           colour: mid-colour)
                                          [20.5 (scalar min: 0.0 max: 20.0)]))))
-    (stroked-bezier-rect x: 500
-                         y: 200
+    (stroked-bezier-rect position: (v2 500 200)
                          width: 900
                          height: 300
                          iterations: [40 (int min: 1 max: 100)]
@@ -125,13 +119,11 @@
                          seed: [44 (int)])))
 
 (define (background)
-  (rect x: 500
-        y: 500
+  (rect position: (v2 500 500)
         width: 1000
         height: 1000
         colour: background-colour)
-  (stroked-bezier-rect x: 500
-                       y: 500
+  (stroked-bezier-rect position: (v2 500 500)
                        width: 1000
                        height: 1000
                        iterations: [100 (int min: 1 max: 100)]
