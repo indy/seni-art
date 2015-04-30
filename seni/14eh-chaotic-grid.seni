@@ -134,29 +134,6 @@
                                     (* 3 third-height))))
                     colour: current-colour)))))
 
-(define (accumulated-rect x: 0
-                          y: 0
-                          width: 10
-                          height: 10
-                          colour: (col/rgb r: 0.0 g: 1.0 b: 0.0 alpha: 0.5)
-                          volatility: 0
-                          passes: 1
-                          seed: "Most men lead lives of quiet desperation 
-                          and go to the grave with the song still in them")
-  (let ((alpha (col/get-alpha colour: colour))
-        (pass-colour (col/set-alpha colour: colour value: (/ alpha passes)))
-        (rng (rng/signed seed: seed)))
-    (on-matrix-stack
-     (translate x: x y: y)
-     (loop (i to: passes)
-           (let (((rr xr yr) (take num: 3 from: rng)))
-             (on-matrix-stack
-              (rotate angle: (* rr 0.02 volatility))
-              (rect position: (v2 (* xr 5 volatility) (* yr 5 volatility))
-                    width: width
-                    height: height
-                    colour: pass-colour)))))))
-
 (define (v x: 0 y: 0 z: 0 scale: 1)
   (+ y (* scale (perlin/signed x: x y: y z: z))))
 
