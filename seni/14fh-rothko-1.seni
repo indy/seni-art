@@ -35,19 +35,19 @@
               colour: (col/rgb r: 0.627 g: 0.627 b: 0.627 alpha: 0.4)
               seed: 272)
   (loop (h from: -20 to: 1020 increment: 20)
-        (bezier tessellation: line-segments
-                line-width: line-width
-                coords: (list
-                         (v2 0 (v x: 0.10 y: h z: seed scale: variation))
-                         (v2 333 (v x: 333.33 y: h z: seed scale: variation))
-                         (v2 666 (v x: 666.66 y: h z: seed scale: variation))
-                         (v2 1000 (v x: 1000.10 y: h z: seed scale: variation)))
-                colour: colour)
-        (bezier tessellation: line-segments
-                line-width: line-width
-                coords: (list
-                         (v2 (v x: 0.10 y: h z: seed scale: variation) 0)
-                         (v2 (v x: 333.33 y: h z: seed scale: variation) 333)
-                         (v2 (v x: 666.66 y: h z: seed scale: variation) 666)
-                         (v2 (v x: 1000.10 y: h z: seed scale: variation) 1000))
-                colour: colour)))
+    (bezier tessellation: line-segments
+            line-width: line-width
+            coords: (list
+                     (v2 0 (v x: 0.10 y: h z: seed scale: variation))
+                     (v2 333 (v x: 333.33 y: h z: seed scale: variation))
+                     (v2 666 (v x: 666.66 y: h z: seed scale: variation))
+                     (v2 1000 (v x: 1000.10 y: h z: seed scale: variation)))
+            colour: colour)
+    (bezier tessellation: line-segments
+            line-width: line-width
+            coords: (list
+                     (v2 (v x: 0.10 y: h z: seed scale: variation) 0)
+                     (v2 (v x: 333.33 y: h z: seed scale: variation) 333)
+                     (v2 (v x: 666.66 y: h z: seed scale: variation) 666)
+                     (v2 (v x: 1000.10 y: h z: seed scale: variation) 1000))
+            colour: colour)))
