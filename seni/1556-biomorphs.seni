@@ -1,5 +1,5 @@
 ;; main will render a Dawkin's Biomorph
-(main)
+(render)
 
 ;; render a segment at 0, 0 with a length along the positive x axis
 ;;
