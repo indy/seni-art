@@ -1,0 +1,51 @@
+
+;; draw-octagon renders an octagon with it's center in position
+(define (draw-octagon position: (v2 100 100)
+                      radius: 100
+                      colour: black)
+  (on-matrix-stack
+    (translate x: (v2/x position)
+               y: (v2/y position))
+    (rotate angle: (/ PIPI 16)) ; align 
+    (poly position: (v2 0 0)
+          tessellation: 8
+          width: radius
+          height: radius
+          colour: colour)))
+
+;; draws a square to the top-right of an octagon described by position and radius
+(define (draw-corner-square position: (v2 100 100)
+                            radius: 100
+                            colour: black)
+  (on-matrix-stack
+    (translate x: (+ radius(v2/x position))
+               y: (+ radius(v2/y position)))
+    ;(rotate angle: (/ PI 4))
+    (poly position: (v2 0 0)
+          tessellation: 4
+          colour: colour
+          width: (/ radius 2)
+          height: (/ radius 2))))
+
+
+(define (draw-segment position: (v2 500 500)
+                      radius: 200)
+  (draw-octagon position: position
+                radius: radius
+                colour: red)
+  (draw-corner-square position: position
+                      radius: radius
+                      colour: green))
+
+(define master-radius 50)
+
+(on-matrix-stack
+  (translate x: 500
+             y: 500)
+  (rotate angle: [0 (scalar max: PIPI)])
+  (loop (y from: -700 until: 700 increment: (* 2 master-radius))
+    (loop (x from: -700 until: 700 increment: (* 2 master-radius))
+      (draw-segment position: (v2 x y)
+                    radius: master-radius))))
+
+
